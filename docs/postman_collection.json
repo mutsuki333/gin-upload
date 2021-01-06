@@ -1,0 +1,102 @@
+{
+	"info": {
+		"_postman_id": "6223effc-3eeb-4d0a-bd21-a48c0b4f08a1",
+		"name": "Gin-Upload",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "File",
+			"item": [
+				{
+					"name": "Upload",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "file",
+									"type": "file",
+									"src": "/Users/chenyifan/Downloads/file.png"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{HOST}}/api/attachment",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"api",
+								"attachment"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Info",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/attachment/b84c7b62-0f8b-44b6-bda1-4aac33120198",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"attachment",
+								"b84c7b62-0f8b-44b6-bda1-4aac33120198"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete file",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{API}}/attachment/b84c7b62-0f8b-44b6-bda1-4aac33120198",
+							"host": [
+								"{{API}}"
+							],
+							"path": [
+								"attachment",
+								"b84c7b62-0f8b-44b6-bda1-4aac33120198"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "File",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{HOST}}/attachments/2021/1/b84c7b62-0f8b-44b6-bda1-4aac33120198.png",
+							"host": [
+								"{{HOST}}"
+							],
+							"path": [
+								"attachments",
+								"2021",
+								"1",
+								"b84c7b62-0f8b-44b6-bda1-4aac33120198.png"
+							]
+						},
+						"description": "The file it self."
+					},
+					"response": []
+				}
+			],
+			"description": "File upload api",
+			"protocolProfileBehavior": {}
+		}
+	],
+	"protocolProfileBehavior": {}
+}
