@@ -18,4 +18,8 @@ server.Run()
 
 ## API
 
+* Upload File : `POST {{API}}/attachment/`
+* File Info : `GET {{API}}/attachment/:id`
+* Delete File : `DELETE {{API}}/attachment/:id`
+
 [postman collection](docs/postman_collection.json)
