@@ -1,4 +1,4 @@
-# gin-uploader
+# gin-upload
 
 File related operation APIs
 
@@ -7,10 +7,10 @@ File related operation APIs
 ```go
 server := gin.Default()
 api := server.Group("/api")
-config := uploader.New()
+config := upload.New()
 config.UploadFolder = filepath.Join("data", "attachments")
 config.StaticRoot = "attachments"
-uploader.Register(api, config)
+upload.Register(api, config)
 
 server.Static("/attachments", "./data/attachments")
 server.Run()

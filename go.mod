@@ -1,4 +1,4 @@
-module evan-soft.com/bricks/gin-uploader
+module evan-soft.com/bricks/gin-upload
 
 go 1.15
 

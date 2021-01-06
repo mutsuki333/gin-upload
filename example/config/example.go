@@ -3,17 +3,17 @@ package main
 import (
 	"path/filepath"
 
-	uploader "evan-soft.com/bricks/gin-uploader"
+	upload "evan-soft.com/bricks/gin-upload"
 	"github.com/gin-gonic/gin"
 )
 
 func main() {
 	server := gin.Default()
 	api := server.Group("/api")
-	config := uploader.New()
+	config := upload.New()
 	config.UploadFolder = filepath.Join("data", "attachments")
 	config.StaticRoot = "attachments"
-	uploader.Register(api, config)
+	upload.Register(api, config)
 
 	server.Static("/attachments", "./data/attachments")
 	server.Run()
