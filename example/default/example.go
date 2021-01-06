@@ -1,8 +1,8 @@
 package main
 
 import (
-	upload "evan-soft.com/bricks/gin-upload"
 	"github.com/gin-gonic/gin"
+	upload "github.com/mutsuki333/gin-upload"
 )
 
 func main() {

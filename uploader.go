@@ -1,7 +1,7 @@
 package upload
 
 import (
-	"errors"
+	"fmt"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -45,12 +45,6 @@ func Register(base *gin.RouterGroup, u *Uploader) {
 	controllers(base)
 }
 
-//Default the default register
-func Default(base *gin.RouterGroup) {
-	u := New()
-	Register(base, u)
-}
-
 //Upload file
 func (u *Uploader) Upload(c *gin.Context) (file *File, err error) {
 	f, err := c.FormFile("file")
@@ -91,8 +85,8 @@ func (u *Uploader) Upload(c *gin.Context) (file *File, err error) {
 	return
 }
 
-//Delete file, accepts string or uuid
-func (u *Uploader) Delete(id interface{}) (file *File, err error) {
+//Get file
+func (u *Uploader) Get(id interface{}) (file *File, err error) {
 	var uid uuid.UUID
 	switch id := id.(type) {
 	case uuid.UUID:
@@ -100,7 +94,10 @@ func (u *Uploader) Delete(id interface{}) (file *File, err error) {
 	case string:
 		uid, err = uuid.Parse(id)
 	default:
-		err = errors.New("Unknown argument")
+		err = &Error{
+			Code:    ParserError,
+			Message: fmt.Sprintf("Unknown argument %T", id),
+		}
 	}
 	if err != nil {
 		return
@@ -110,14 +107,34 @@ func (u *Uploader) Delete(id interface{}) (file *File, err error) {
 	if err != nil {
 		return
 	}
+	file.URL = url("/", u.StaticRoot, file.Path)
+	return
+}
+
+//Delete file, accepts string or uuid
+func (u *Uploader) Delete(id interface{}) (file *File, err error) {
+	file, err = u.Get(id)
+	if err != nil {
+		return
+	}
 	err = os.Remove(filepath.Join(u.UploadFolder, file.Path))
 	if err != nil {
-		u.DB.Delete(file, uid)
+		u.DB.Delete(file)
 		return
 	}
-	err = u.DB.Delete(file, uid).Error
+	err = u.DB.Delete(file).Error
 	if err != nil {
 		return
 	}
+	return
+}
+
+//GetURL file
+func (u *Uploader) GetURL(id interface{}) (URL string, err error) {
+	file, err := u.Get(id)
+	if err != nil {
+		return
+	}
+	URL = url("/", u.StaticRoot, file.Path)
 	return
 }

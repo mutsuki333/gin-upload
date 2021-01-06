@@ -1,10 +1,11 @@
 package main
 
 import (
+	"net/http"
 	"path/filepath"
 
-	upload "evan-soft.com/bricks/gin-upload"
 	"github.com/gin-gonic/gin"
+	upload "github.com/mutsuki333/gin-upload"
 )
 
 func main() {
@@ -14,6 +15,19 @@ func main() {
 	config.UploadFolder = filepath.Join("data", "attachments")
 	config.StaticRoot = "attachments"
 	upload.Register(api, config)
+
+	//Custom Logic
+	api.POST("/MyUploads", func(c *gin.Context) {
+		// some logic or validation
+		file, err := upload.Upload(c)
+		if err != nil {
+			c.AbortWithStatusJSON(500, gin.H{
+				"message": err.Error(),
+			})
+		} else {
+			c.JSON(http.StatusOK, file)
+		}
+	})
 
 	server.Static("/attachments", "./data/attachments")
 	server.Run()

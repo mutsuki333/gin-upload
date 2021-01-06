@@ -1,4 +1,4 @@
-module evan-soft.com/bricks/gin-upload
+module github.com/mutsuki333/gin-upload
 
 go 1.15
 
