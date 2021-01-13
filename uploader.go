@@ -5,6 +5,7 @@ import (
 	"os"
 	"path/filepath"
 	"strconv"
+	"strings"
 	"time"
 
 	"github.com/gin-gonic/gin"
@@ -53,7 +54,7 @@ func (u *Uploader) Upload(c *gin.Context) (file *File, err error) {
 	}
 	id := uuid.New()
 	ext := filepath.Ext(f.Filename)
-	storedFileName := id.String() + ext
+	storedFileName := strings.Replace(id.String(), "-", "", -1) + ext
 	t := time.Now()
 	dir := filepath.Join(
 		strconv.Itoa(t.Year()),
