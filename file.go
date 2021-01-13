@@ -9,7 +9,7 @@ import (
 
 //File the file stored in db
 type File struct {
-	ID        uuid.UUID `gorm:"type:uuid;primary_key;"`
+	ID        uuid.UUID `gorm:"type:varchar(36);primary_key;"`
 	Filename  string
 	Ext       string
 	Path      string
