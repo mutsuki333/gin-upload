@@ -95,10 +95,7 @@ func (u *Uploader) Get(id interface{}) (file *File, err error) {
 	case string:
 		uid, err = uuid.Parse(id)
 	default:
-		err = &Error{
-			Code:    ParserError,
-			Message: fmt.Sprintf("Unknown argument %T", id),
-		}
+		err = fmt.Errorf("Unknown argument %T", id)
 	}
 	if err != nil {
 		return
