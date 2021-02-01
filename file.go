@@ -16,6 +16,7 @@ type File struct {
 	Size      int64
 	MIMEType  string
 	URL       string `gorm:"-"`
+	Track     string
 	CreatedAt time.Time
 }
 
