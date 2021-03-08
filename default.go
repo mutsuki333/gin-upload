@@ -22,3 +22,8 @@ func Get(id interface{}) (file *File, err error) {
 func Delete(id interface{}) (file *File, err error) {
 	return uploader.Delete(id)
 }
+
+// GetURL get url of file
+func GetURL(id interface{}) (URL string, err error) {
+    return uploader.GetURL(id)
+}

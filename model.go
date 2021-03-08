@@ -27,3 +27,8 @@ func (file *File) BeforeCreate(tx *gorm.DB) (err error) {
 	}
 	return
 }
+
+func (file *File) AfterFind(tx *gorm.DB) (err error) {
+	file.URL = url("/", uploader.StaticRoot, file.Path)
+	return
+}
