@@ -33,6 +33,12 @@ func New() *Uploader {
 
 //Register the file service
 func Register(base *gin.RouterGroup, u *Uploader) {
+	Init(u)
+	Controllers(base)
+}
+
+// Init module
+func Init(u *Uploader) {
 	if u.DB == nil {
 		mkdir("data")
 		DB, err := gorm.Open(sqlite.Open("data/file.db"), &gorm.Config{})
@@ -41,9 +47,12 @@ func Register(base *gin.RouterGroup, u *Uploader) {
 		}
 		u.DB = DB
 	}
-	u.DB.AutoMigrate(&File{})
 	uploader = u
-	controllers(base)
+}
+
+// Migrate db
+func Migrate(DB *gorm.DB) {
+	DB.AutoMigrate(&File{})
 }
 
 //Upload file

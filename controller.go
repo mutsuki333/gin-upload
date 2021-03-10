@@ -6,7 +6,8 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
-func controllers(base *gin.RouterGroup) {
+// Controllers setup uploader controllers
+func Controllers(base *gin.RouterGroup) {
 	api := base.Group("/attachment")
 
 	api.POST("/", func(c *gin.Context) {
